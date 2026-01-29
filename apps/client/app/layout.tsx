@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Tatak Pay",
   description: "Fast & Secure Payments powered by Xendit",
   icons: {
-    icon: "/icon.png",
+    icon: "/logo.jpg",
   },
 };
 
