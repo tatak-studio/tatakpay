@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import XenditBadge from "./XenditBadge";
 
 export default function PaymentForm({
   initialEmail,
@@ -53,10 +54,12 @@ export default function PaymentForm({
 
   return (
     <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-lg border border-gray-100">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Secure Payment</h2>
+      <h2 className="text-2xl font-bold text-gray-900 mb-6 select-none text-center">
+        Secure Payment
+      </h2>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-lg text-sm">
+        <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-lg text-sm text-center">
           {error}
         </div>
       )}
@@ -65,7 +68,7 @@ export default function PaymentForm({
         <div>
           <label
             htmlFor="amount"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-gray-700 mb-1 select-none text-center"
           >
             Amount (PHP)
           </label>
@@ -94,7 +97,7 @@ export default function PaymentForm({
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-gray-700 mb-1 select-none text-center"
           >
             Email Address
           </label>
@@ -112,7 +115,7 @@ export default function PaymentForm({
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 px-4 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-lg shadow-md transform transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center"
+          className="w-full py-3 px-4 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-lg shadow-md transform transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center cursor-pointer select-none"
         >
           {loading ? (
             <svg
@@ -141,9 +144,8 @@ export default function PaymentForm({
         </button>
       </form>
 
-      <div className="mt-4 flex items-center justify-center space-x-2 text-xs text-gray-400">
-        <span>Powered by</span>
-        <span className="font-bold text-gray-500">Xendit</span>
+      <div className="mt-8 flex justify-center">
+        <XenditBadge />
       </div>
     </div>
   );
