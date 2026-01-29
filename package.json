@@ -2,8 +2,14 @@
   "name": "tatak-pay",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
+    "build": "RAYON_NUM_THREADS=4 turbo run build",
+    "dev": "RAYON_NUM_THREADS=1 UV_THREADPOOL_SIZE=4 turbo run dev --filter api --filter admin --filter client",
+    "dev:api": "RAYON_NUM_THREADS=1 UV_THREADPOOL_SIZE=4 turbo run dev --filter api",
+    "dev:admin": "RAYON_NUM_THREADS=1 UV_THREADPOOL_SIZE=4 turbo run dev --filter admin",
+    "dev:client": "RAYON_NUM_THREADS=1 UV_THREADPOOL_SIZE=4 turbo run dev --filter client",
+    "dev:api:client": "RAYON_NUM_THREADS=1 UV_THREADPOOL_SIZE=4 turbo run dev --filter api --filter client",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"

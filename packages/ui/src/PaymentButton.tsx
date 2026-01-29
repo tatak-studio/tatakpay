@@ -5,7 +5,7 @@ interface PaymentButtonProps {
   userId: string;
   email: string;
   onSuccess?: (url: string) => void;
-  onError?: (error: any) => void;
+  onError?: (error: unknown) => void;
 }
 
 export const PaymentButton: React.FC<PaymentButtonProps> = ({
