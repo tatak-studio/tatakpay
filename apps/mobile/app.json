@@ -13,9 +13,11 @@
       "backgroundColor": "#2563eb"
     },
     "ios": {
+      "bundleIdentifier": "com.tatakstudio.tatakpay",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.tatakstudio.tatakpay",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
