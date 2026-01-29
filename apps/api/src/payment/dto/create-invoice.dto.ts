@@ -2,7 +2,7 @@ import { IsEmail, IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
 
 export class CreateInvoiceDto {
   @IsNumber()
-  @Min(100, { message: 'Amount must be at least 100' })
+  @Min(1, { message: 'Amount must be at least 1' })
   amount: number;
 
   @IsString()

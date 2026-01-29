@@ -32,14 +32,18 @@ export default function PaymentForm({
       });
 
       if (!response.ok) {
-        throw new Error("Payment creation failed");
-      }
-
-      const data = await response.json();
-      if (data.paymentUrl) {
-        window.location.href = data.paymentUrl;
+        const errorData = await response.json();
+        const errorMessage = Array.isArray(errorData.message)
+          ? errorData.message.join(", ")
+          : errorData.message || "Payment creation failed";
+        throw new Error(errorMessage);
       } else {
-        throw new Error("No payment URL received");
+        const data = await response.json();
+        if (data.paymentUrl) {
+          window.location.href = data.paymentUrl;
+        } else {
+          throw new Error("No payment URL received");
+        }
       }
     } catch (err: unknown) {
       if (err instanceof Error) {
