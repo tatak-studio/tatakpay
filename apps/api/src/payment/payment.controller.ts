@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Headers, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Headers,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
+import { CreateInvoiceDto } from './dto/create-invoice.dto';
 import { PaymentService } from './payment.service';
 
 interface WebhookPayload {
@@ -11,24 +21,25 @@ export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 
   @Get('user/:userId')
+  @UseGuards(ApiKeyGuard)
   async getPaymentsByUser(@Param('userId') userId: string) {
     return this.paymentService.getPaymentsByUser(userId);
   }
 
   @Get()
+  @UseGuards(ApiKeyGuard)
   async getAllPayments() {
     return this.paymentService.getAllPayments();
   }
 
   @Get('email/:email')
+  @UseGuards(ApiKeyGuard)
   async getPaymentsByEmail(@Param('email') email: string) {
     return this.paymentService.getPaymentsByEmail(email);
   }
 
   @Post('invoice')
-  async createInvoice(
-    @Body() body: { amount: number; userId: string; email: string },
-  ) {
+  async createInvoice(@Body() body: CreateInvoiceDto) {
     return this.paymentService.createInvoice(body);
   }
 
