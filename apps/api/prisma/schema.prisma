@@ -1,0 +1,35 @@
+// apps/api/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  role      String   @default("customer") // 'admin' | 'customer'
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  payments  Payment[]
+}
+
+model Payment {
+  id              String   @id @default(uuid())
+  xenditInvoiceId String   @unique
+  externalId      String   @unique
+  amount          Float
+  currency        String   @default("PHP")
+  status          String   // 'PENDING', 'PAID', 'EXPIRED', etc.
+  description     String?
+  paymentUrl      String?
+
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
